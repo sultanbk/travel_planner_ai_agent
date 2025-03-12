@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Planner</title>
+</head>
+<body>
+    <h1>Welcome to the Travel Planner</h1>
+
+    <!-- Trip Planning Form -->
+    <form id="trip-form">
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" name="destination"><br><br>
+
+        <label for="budget">Budget:</label>
+        <input type="text" id="budget" name="budget"><br><br>
+
+        <label for="duration">Duration:</label>
+        <input type="text" id="duration" name="duration"><br><br>
+
+        <label for="interests">Interests:</label>
+        <input type="text" id="interests" name="interests"><br><br>
+
+        <label for="travel_style">Travel Style:</label>
+        <input type="text" id="travel_style" name="travel_style"><br><br>
+
+        <label for="travel_dates">Travel Dates:</label>
+        <input type="text" id="travel_dates" name="travel_dates"><br><br>
+
+        <label for="num_travelers">Number of Travelers:</label>
+        <input type="text" id="num_travelers" name="num_travelers"><br><br>
+
+        <button type="submit">Plan Trip</button>
+    </form>
+
+    <h2>Status:</h2>
+    <p id="status-message"></p>
+
+    <h2>Travel Reports</h2>
+
+    <h3>Weather Report</h3>
+    <div id="weather"></div>
+
+    <h3>Accommodation Report</h3>
+    <div id="accommodation"></div>
+
+    <h3>Transportation Report</h3>
+    <div id="transportation"></div>
+
+    <script>
+        document.getElementById('trip-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            document.getElementById('status-message').innerText = 'Processing...';
+            const formData = new FormData(event.target);
+
+            const response = await fetch('/plan_trip', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            document.getElementById('status-message').innerText = result.message;
+
+            if (result.message.includes("successfully")) {
+                setTimeout(fetchReports, 5000); 
+            }
+        });
+
+        async function fetchReports() {
+            const response = await fetch('/get_reports');
+            const data = await response.json();
+
+            document.getElementById('weather').innerHTML = data.weather;
+            document.getElementById('accommodation').innerHTML = data.accommodation;
+            document.getElementById('transportation').innerHTML = data.transportation;
+        }
+    </script>
+</body>
+</html>

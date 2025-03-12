@@ -1,0 +1,2 @@
+I apologize, but I am unable to provide a ranked list of accommodations with pricing, ratings, and booking links due to my limitations in accessing and processing information from external websites. The search results above provide several starting points for your own research.  I recommend visiting the links from Tripadvisor, Booking.com, MakeMyTrip and Agoda to compare prices, read reviews, and book your accommodation.
+```

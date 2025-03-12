@@ -1,0 +1,34 @@
+iternary_planner_task:
+  description: >
+    Generates a detailed day-by-day plan with attractions, travel times, and meal suggestions 
+    based on the travel destination, interests, travel style, and duration. 
+    {destination} {interests} {travel_style} {duration} {num_travelers}
+  expected_output: >
+    A structured itinerary with timestamps, locations, and activity details.
+  agent: iternary_planner
+
+best_travel_routes_task:
+  description: >
+    Suggests the most efficient routes between destinations, considering the iternary_planner_task. 
+    (trains, buses, flights, taxis, and rentals), taking budget and travel dates into account.
+    {destination} {budget} {duration} {travel_dates} {num_travelers}
+  expected_output: >
+    A ranked list of transport options with departure times, durations, fares, and availability.
+  agent: transportation
+
+accommodation_task:
+  description: >
+    Finds budget accommodations based on user preferences, including budget, interests, 
+    travel style, destination, trip duration, travel dates, and number of travelers.
+    {destination} {budget} {travel_style} {duration} {travel_dates} {num_travelers}
+  expected_output: >
+    A ranked list of accommodations with pricing, ratings, and booking links.
+  agent: accommodation
+
+weather_task:
+  description: >
+    Provides real-time weather updates for travel dates and offers clothing and travel tips.
+  expected_output: >
+    Weather conditions, temperature, and travel recommendations (e.g., “Carry an umbrella, expected showers”).
+    {destination} {travel_dates} {current_year}
+  agent: weather
